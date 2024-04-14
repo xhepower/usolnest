@@ -6,19 +6,14 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import config from './config';
 import { UsersModule } from './users/users.module';
-import { RutasModule } from './rutas/rutas.module';
 import { DatabaseModule } from './database/database.module';
-import { ClientesModule } from './clientes/clientes.module';
-import { PrestamosModule } from './prestamos/prestamos.module';
-import { PagosModule } from './pagos/pagos.module';
 import { AuthModule } from './auth/auth.module';
-import { ReportesModule } from './reportes/reportes.module';
+import { PdfsModule } from './pdfs/pdfs.module';
 
 @Global()
 @Module({
   imports: [
     UsersModule,
-    RutasModule,
     DatabaseModule,
     ConfigModule.forRoot({
       envFilePath: '.env',
@@ -31,15 +26,9 @@ import { ReportesModule } from './reportes/reportes.module';
       }),
     }),
 
-    ClientesModule,
-
-    PrestamosModule,
-
-    PagosModule,
-
     AuthModule,
 
-    ReportesModule,
+    PdfsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
