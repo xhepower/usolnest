@@ -10,6 +10,7 @@ import {
 import { PdfsService } from './pdfs.service';
 import { CreatePdfDto } from './dto/create-pdf.dto';
 import { UpdatePdfDto } from './dto/update-pdf.dto';
+import { CreateArchivosDto } from './dto/create-archivo.dto';
 
 @Controller('pdfs')
 export class PdfsController {
@@ -19,7 +20,10 @@ export class PdfsController {
   create(@Body() createPdfDto: CreatePdfDto) {
     return this.pdfsService.create(createPdfDto);
   }
-
+  @Post('archivos')
+  subirArchivos(@Body() createArchivosDto: CreateArchivosDto) {
+    return this.pdfsService.createArchivos(createArchivosDto);
+  }
   @Get()
   findAll() {
     return this.pdfsService.findAll();
