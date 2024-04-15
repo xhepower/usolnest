@@ -40,7 +40,9 @@ export class PdfsService {
 
     return rta;
   }
-
+  async findByName(nombrePDF: string) {
+    return this.pdfRepo.findOne({ where: { nombrePDF } });
+  }
   findOne(id: number) {
     return `This action returns a #${id} pdf`;
   }

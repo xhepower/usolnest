@@ -24,6 +24,11 @@ export class PdfsController {
   subirArchivos(@Body() createArchivosDto: CreateArchivosDto) {
     return this.pdfsService.createArchivos(createArchivosDto);
   }
+  @Get('archivos/:nombre')
+  findbyname(@Param('nombre') nombre: string) {
+    // return this.pdfsService.findAll();
+    return this.pdfsService.findByName(nombre);
+  }
   @Get()
   findAll() {
     return this.pdfsService.findAll();
