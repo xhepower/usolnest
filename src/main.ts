@@ -14,6 +14,7 @@ async function bootstrap() {
       },
     }),
   );
+  app.getHttpServer().setTimeout(30000);
   app.enableCors();
   app.use(bodyParser.json({ limit: '20mb' }));
   app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }));
