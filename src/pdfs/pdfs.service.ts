@@ -5,7 +5,7 @@ import { CreatePdfDto } from './dto/create-pdf.dto';
 import { UpdatePdfDto } from './dto/update-pdf.dto';
 import { Pdf } from './entities/pdf.entity';
 import { writeFile } from 'fs/promises';
-import { existsSync, mkdirSync } from 'fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync } from 'fs';
 import { CreateArchivosDto } from './dto/create-archivo.dto';
 
 @Injectable()
@@ -43,6 +43,7 @@ export class PdfsService {
   async findByName(nombrePDF: string) {
     return this.pdfRepo.findOne({ where: { nombrePDF } });
   }
+
   findOne(id: number) {
     return `This action returns a #${id} pdf`;
   }
@@ -55,3 +56,5 @@ export class PdfsService {
     return `This action removes a #${id} pdf`;
   }
 }
+
+// Lee el contenido de la carpeta de manera síncrona
