@@ -1,11 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Between, FindOptionsWhere } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreatePdfDto } from './dto/create-pdf.dto';
-import { UpdatePdfDto } from './dto/update-pdf.dto';
+
 import { Pdf } from './entities/pdf.entity';
 import { writeFile } from 'fs/promises';
-import { existsSync, mkdirSync, readFileSync, readdirSync } from 'fs';
+import { existsSync, mkdirSync } from 'fs';
 import { CreateArchivosDto } from './dto/create-archivo.dto';
 
 @Injectable()
@@ -41,16 +41,21 @@ export class PdfsService {
     return rta;
   }
   async findByName(nombrePDF: string) {
-    return this.pdfRepo.findOne({ where: { nombrePDF } });
+    return await this.pdfRepo.findOne({ where: { nombrePDF } });
   }
-
+  async pdfNombres(nombrePDF: string) {
+    const registros = await this.findAll();
+    const nombresPDF = registros.map((dato) => dato.nombrePDF);
+    console.log(nombresPDF);
+    return nombresPDF.includes(nombrePDF);
+  }
   findOne(id: number) {
     return `This action returns a #${id} pdf`;
   }
 
-  update(id: number, updatePdfDto: UpdatePdfDto) {
-    return `This action updates a #${id} pdf`;
-  }
+  // update(id: number, updatePdfDto: UpdatePdfDto) {
+  //   return `This action updates a #${id} pdf`;
+  // }
 
   remove(id: number) {
     return `This action removes a #${id} pdf`;

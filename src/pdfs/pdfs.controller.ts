@@ -1,16 +1,6 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  Res,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Res } from '@nestjs/common';
 import { PdfsService } from './pdfs.service';
 import { CreatePdfDto } from './dto/create-pdf.dto';
-import { UpdatePdfDto } from './dto/update-pdf.dto';
 import { CreateArchivosDto } from './dto/create-archivo.dto';
 import { join } from 'path';
 
@@ -30,6 +20,11 @@ export class PdfsController {
   findbyname(@Param('nombre') nombre: string) {
     // return this.pdfsService.findAll();
     return this.pdfsService.findByName(nombre);
+  }
+  @Get('existe/:nombre')
+  existeNombre(@Param('nombre') nombre: string) {
+    // return this.pdfsService.findAll();
+    return this.pdfsService.pdfNombres(nombre);
   }
   @Get('photos/:nombre')
   photos(@Param('nombre') nombre: string, @Res() res) {
@@ -54,15 +49,5 @@ export class PdfsController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.pdfsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePdfDto: UpdatePdfDto) {
-    return this.pdfsService.update(+id, updatePdfDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.pdfsService.remove(+id);
   }
 }
