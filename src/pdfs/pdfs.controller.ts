@@ -9,22 +9,22 @@ export class PdfsController {
   constructor(private readonly pdfsService: PdfsService) {}
 
   @Post()
-  create(@Body() createPdfDto: CreatePdfDto) {
-    return this.pdfsService.create(createPdfDto);
+  async create(@Body() createPdfDto: CreatePdfDto) {
+    return await this.pdfsService.create(createPdfDto);
   }
   @Post('archivos')
-  subirArchivos(@Body() createArchivosDto: CreateArchivosDto) {
-    return this.pdfsService.createArchivos(createArchivosDto);
+  async subirArchivos(@Body() createArchivosDto: CreateArchivosDto) {
+    return await this.pdfsService.createArchivos(createArchivosDto);
   }
   @Get('archivos/:nombre')
-  findbyname(@Param('nombre') nombre: string) {
+  async findbyname(@Param('nombre') nombre: string) {
     // return this.pdfsService.findAll();
-    return this.pdfsService.findByName(nombre);
+    return await this.pdfsService.findByName(nombre);
   }
   @Get('existe/:nombre')
-  existeNombre(@Param('nombre') nombre: string) {
+  async existeNombre(@Param('nombre') nombre: string) {
     // return this.pdfsService.findAll();
-    return this.pdfsService.pdfNombres(nombre);
+    return await this.pdfsService.pdfNombres(nombre);
   }
   @Get('photos/:nombre')
   photos(@Param('nombre') nombre: string, @Res() res) {
