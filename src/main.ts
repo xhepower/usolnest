@@ -5,6 +5,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import * as bodyParser from 'body-parser';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true, // Ignorar datos que no esten en los DTO
@@ -15,7 +16,7 @@ async function bootstrap() {
     }),
   );
   app.getHttpServer().setTimeout(30000);
-  app.enableCors();
+
   app.use(bodyParser.json({ limit: '20mb' }));
   app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }));
   const config = new DocumentBuilder()
