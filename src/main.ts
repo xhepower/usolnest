@@ -7,6 +7,7 @@ async function bootstrap() {
   //const app = await NestFactory.create(AppModule);
   const app = await NestFactory.create(AppModule, {
     cors: true,
+    forceCloseConnections: true,
   });
   app.enableCors({
     origin: '*',
@@ -25,6 +26,7 @@ async function bootstrap() {
     }),
   );
   app.getHttpServer().setTimeout(80000);
+
   app.use(bodyParser.json({ limit: '20mb' }));
   app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }));
   const config = new DocumentBuilder()
